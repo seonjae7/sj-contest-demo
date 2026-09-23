@@ -1,0 +1,336 @@
+<!doctype html>
+<html lang="ko">
+<head>
+<meta charset="utf-8">
+<meta name="robots" content="noindex">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>SJ 대회 · 앱 시안</title>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Black+Han+Sans&family=IBM+Plex+Sans+KR:wght@400;500;600;700&display=swap">
+<style>
+:root{
+  --bg:#EEF0F3; --surface:#FFFFFF; --ink:#131A2A; --muted:#566074; --line:#DCE0E7; --soft:#E4E8EE;
+  --stage:#16213E; --stage-ink:#FFFFFF; --stage-muted:#B7C0D3;
+  --btn:#16213E; --btn-fg:#FFFFFF; --gold:#C99A17; --gold-soft:#FBF1D6;
+  --ok:#177245; --ok-fg:#FFFFFF; --wait-bg:#FCEBC2; --wait-fg:#6B4300; --off:#6A7282;
+  --sel-bg:#EEF2FF; --sel:#16213E;
+}
+@media (prefers-color-scheme: dark){
+  :root:not([data-theme="light"]){
+    --bg:#0D121D; --surface:#172033; --ink:#EEF1F6; --muted:#A5AEBF; --line:#2A3449; --soft:#212B40;
+    --stage:#0A0F1A; --stage-ink:#FFFFFF; --stage-muted:#A5AEBF;
+    --btn:#E2B93B; --btn-fg:#131A2A; --gold:#E2B93B; --gold-soft:#3A3217;
+    --ok:#2E9B63; --ok-fg:#FFFFFF; --wait-bg:#4A3A12; --wait-fg:#F6D98C; --off:#8A93A6;
+    --sel-bg:#22304F; --sel:#E2B93B;
+  }
+}
+:root[data-theme="dark"]{
+  --bg:#0D121D; --surface:#172033; --ink:#EEF1F6; --muted:#A5AEBF; --line:#2A3449; --soft:#212B40;
+  --stage:#0A0F1A; --stage-ink:#FFFFFF; --stage-muted:#A5AEBF;
+  --btn:#E2B93B; --btn-fg:#131A2A; --gold:#E2B93B; --gold-soft:#3A3217;
+  --ok:#2E9B63; --ok-fg:#FFFFFF; --wait-bg:#4A3A12; --wait-fg:#F6D98C; --off:#8A93A6;
+  --sel-bg:#22304F; --sel:#E2B93B;
+}
+:root{box-sizing:border-box;padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px)}
+html{scroll-padding-top:env(safe-area-inset-top,0px)}
+*,*::before,*::after{box-sizing:border-box}
+html,body{height:100%}
+body{margin:0;background:var(--bg);color:var(--ink);font-family:'IBM Plex Sans KR','Apple SD Gothic Neo','Malgun Gothic',sans-serif;-webkit-font-smoothing:antialiased}
+button,input{font:inherit;color:inherit}
+button{cursor:pointer}
+:focus-visible{outline:3px solid var(--gold);outline-offset:2px}
+#app{max-width:440px;margin:0 auto;min-height:100%;display:flex;flex-direction:column;background:var(--bg)}
+@media (min-width:480px){#app{border-left:1px solid var(--line);border-right:1px solid var(--line)}}
+#app.wide{max-width:1200px}
+.display{font-family:'Black Han Sans','IBM Plex Sans KR',sans-serif;font-weight:400;letter-spacing:.3px}
+.top{position:sticky;top:env(safe-area-inset-top,0px);z-index:5;display:flex;align-items:center;gap:6px;min-height:58px;padding:0 10px 0 6px;background:var(--stage);color:var(--stage-ink)}
+.top.light{background:var(--surface);color:var(--ink);border-bottom:1px solid var(--line)}
+.top h1{margin:0;font-size:17px;font-weight:700}
+.top .brand{font-size:25px;padding-left:12px}
+.top .right{margin-left:auto;font-size:13px;color:inherit;opacity:.8}
+.iconbtn{width:44px;height:44px;border:0;background:transparent;display:flex;align-items:center;justify-content:center;color:inherit;border-radius:10px}
+.body{flex:1;display:flex;flex-direction:column;gap:18px;padding:20px}
+.foot{position:sticky;bottom:0;z-index:5;display:flex;flex-direction:column;gap:10px;padding:12px 20px calc(16px + env(safe-area-inset-bottom,0px));background:var(--surface);border-top:1px solid var(--line)}
+.btn{display:flex;align-items:center;justify-content:center;width:100%;min-height:54px;border:0;border-radius:14px;background:var(--btn);color:var(--btn-fg);font-size:17px;font-weight:700}
+.btn:disabled{background:var(--soft);color:var(--muted);cursor:default}
+.btn.ghost{background:transparent;color:var(--ink);min-height:48px;font-size:16px;font-weight:600}
+.btn.small{min-height:46px;font-size:15px;border-radius:12px}
+.card{background:var(--surface);border:1px solid var(--line);border-radius:16px;padding:16px;display:flex;flex-direction:column;gap:8px}
+.muted{color:var(--muted)}
+.row{display:flex;justify-content:space-between;align-items:center;gap:12px}
+.pill{display:inline-flex;align-items:center;font-size:12px;font-weight:700;padding:4px 10px;border-radius:999px;white-space:nowrap}
+.pill.ok{background:var(--ok);color:var(--ok-fg)}
+.pill.wait{background:var(--wait-bg);color:var(--wait-fg)}
+.pill.off{background:var(--soft);color:var(--muted)}
+.pill.live{background:var(--gold);color:#131A2A}
+h2{margin:0;font-size:18px;font-weight:700}
+.field{display:flex;flex-direction:column;gap:6px}
+.field label{font-size:14px;font-weight:600}
+.field input{height:50px;padding:0 14px;font-size:16px;border:1px solid var(--line);border-radius:12px;background:var(--surface)}
+.grid2{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:12px}
+.choice{display:flex;align-items:center;gap:12px;width:100%;min-height:58px;padding:12px 14px;border-radius:14px;border:2px solid var(--line);background:var(--surface);text-align:left}
+.choice[aria-pressed="true"]{border-color:var(--sel);background:var(--sel-bg)}
+.choice:disabled{background:var(--soft);cursor:default}
+.box{width:22px;height:22px;flex-shrink:0;border-radius:6px;border:2px solid var(--muted);display:flex;align-items:center;justify-content:center;color:var(--btn-fg)}
+.round{border-radius:999px}
+.choice[aria-pressed="true"] .box{background:var(--sel);border-color:var(--sel)}
+.choice .t{flex:1;display:flex;flex-direction:column;gap:2px}
+.choice .n{font-size:15px;font-weight:600}
+.choice .s{font-size:13px;color:var(--muted)}
+.choice .p{font-size:15px;font-weight:700}
+.choice:disabled .n,.choice:disabled .p{color:var(--off)}
+.poster{position:relative;background:var(--stage);color:var(--stage-ink);display:flex;flex-direction:column;justify-content:flex-end;gap:8px;padding:18px;overflow:hidden}
+.poster::after{content:"";position:absolute;right:-40px;top:-40px;width:180px;height:180px;border-radius:999px;border:18px solid var(--gold);opacity:.18}
+.poster .title{font-size:30px;line-height:1.12;position:relative}
+.list{display:flex;flex-direction:column;background:var(--surface);border:1px solid var(--line);border-radius:16px;overflow:hidden}
+.list>div{display:flex;justify-content:space-between;align-items:center;gap:12px;padding:14px 16px;border-top:1px solid var(--line)}
+.list>div:first-child{border-top:0}
+.tabs{position:sticky;bottom:0;z-index:5;display:grid;grid-template-columns:repeat(3,minmax(0,1fr));background:var(--surface);border-top:1px solid var(--line);padding-bottom:env(safe-area-inset-bottom,0px)}
+.tabs button{min-height:64px;border:0;background:transparent;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:3px;font-size:12px;font-weight:600;color:var(--muted)}
+.tabs button[aria-current="page"]{color:var(--ink);font-weight:700}
+.tabs button[aria-current="page"] svg{color:var(--gold)}
+.note{font-size:13px;color:var(--muted);line-height:1.55}
+.spin{width:56px;height:56px;border-radius:999px;border:5px solid var(--line);border-top-color:var(--gold);animation:spin .9s linear infinite}
+@keyframes spin{to{transform:rotate(360deg)}}
+@media (prefers-reduced-motion:reduce){.spin{animation-duration:3s}}
+.switch{width:50px;height:30px;flex-shrink:0;border-radius:999px;background:var(--soft);border:1px solid var(--line);padding:3px;display:flex}
+.switch span{width:22px;height:22px;border-radius:999px;background:#fff;box-shadow:0 1px 2px rgba(0,0,0,.2)}
+.switch.on{background:var(--ok);justify-content:flex-end;border-color:var(--ok)}
+.stats{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:8px}
+.stats div{background:rgba(255,255,255,.08);border-radius:12px;padding:10px 12px;display:flex;flex-direction:column;gap:2px}
+.stats small{font-size:12px;color:var(--stage-muted)}
+.stats b{font-size:20px}
+.rank{font-size:22px;font-weight:700}
+.rank.gold{color:var(--gold)}
+.scroll{overflow-x:auto;border:1px solid var(--line);border-radius:14px;background:var(--surface)}
+table{border-collapse:collapse;width:100%;min-width:860px;font-size:14px}
+th{text-align:left;font-size:13px;color:var(--muted);font-weight:600;background:var(--soft);padding:11px 14px;white-space:nowrap}
+td{padding:11px 14px;border-top:1px solid var(--line);white-space:nowrap}
+.chips{display:flex;gap:8px;flex-wrap:wrap}
+.chip{min-height:40px;padding:0 14px;border-radius:999px;border:1px solid var(--line);background:var(--surface);font-size:14px;font-weight:600}
+.chip[aria-pressed="true"]{background:var(--ink);color:var(--bg);border-color:var(--ink)}
+.sumgrid{display:grid;grid-template-columns:repeat(auto-fill,minmax(150px,1fr));gap:10px}
+.toast{position:fixed;left:50%;bottom:calc(24px + env(safe-area-inset-bottom,0px));transform:translateX(-50%);background:var(--ink);color:var(--bg);font-size:14px;padding:10px 16px;border-radius:10px;z-index:20;max-width:90%}
+.sample{font-size:12px;font-weight:600;padding:4px 10px;border-radius:999px;background:var(--gold-soft);color:var(--ink)}
+.linkish{border:0;background:transparent;color:var(--muted);font-size:14px;text-decoration:underline;min-height:44px}
+</style>
+</head>
+<body>
+<div id="app"></div>
+<script>
+(function(){
+  var DIV = [
+    {name:'보디빌딩 -70kg', fee:70000, left:12},
+    {name:'보디빌딩 -80kg', fee:70000, left:8},
+    {name:'보디빌딩 +80kg', fee:70000, left:15},
+    {name:'클래식 피지크', fee:60000, left:5},
+    {name:'피지크', fee:60000, left:3},
+    {name:'비키니', fee:60000, left:0}
+  ];
+  var AGREE = ['[필수] 대회 환불 규정을 확인했어요','[필수] 신청 정보를 대회 주최측에 제공하는 데 동의해요','[필수] 대회 결과 발표 때 이름·소속 공개에 동의해요'];
+  var ROWS = [
+    ['SJ26-0147','김선수','010-****-5678','보디빌딩 -70kg, 클래식 피지크',130000,'paid','09-24 14:03'],
+    ['SJ26-0146','이도윤','010-****-2231','피지크',60000,'paid','09-24 13:51'],
+    ['SJ26-0145','박서준','010-****-9012','보디빌딩 +80kg',70000,'pending','09-24 13:40'],
+    ['SJ26-0144','정하린','010-****-4410','비키니',60000,'paid','09-24 12:18'],
+    ['SJ26-0143','최민재','010-****-7785','보디빌딩 -80kg',70000,'paid','09-24 11:02'],
+    ['SJ26-0142','윤서아','010-****-3307','비키니',60000,'paid','09-24 10:47'],
+    ['SJ26-0141','강지호','010-****-6624','클래식 피지크',60000,'pending','09-24 10:15'],
+    ['SJ26-0140','조현우','010-****-1198','보디빌딩 -70kg, 피지크',130000,'paid','09-24 09:32']
+  ];
+  var S = {screen:'start', loggedIn:false, hist:[], picked:{0:true,3:true}, sent:false, agree:{}, method:0, done:false, paid:false, pub:false, form:false, filter:'all', toast:''};
+  var app = document.getElementById('app');
+  var timer = null, toastTimer = null;
+
+  function won(n){ return n.toLocaleString('ko-KR') + '원'; }
+  function esc(s){ return String(s).replace(/[&<>"]/g, function(c){ return {'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;'}[c]; }); }
+  function sel(){ var t=0,c=0,n=[]; DIV.forEach(function(d,i){ if(S.picked[i] && d.left>0){ t+=d.fee; c++; n.push(d.name);} }); return {total:t,count:c,names:n}; }
+  var I = {
+    back:'<svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M15 18l-6-6 6-6"/></svg>',
+    close:'<svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" aria-hidden="true"><path d="M6 6l12 12M18 6L6 18"/></svg>',
+    check:'<svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12l5 5L19 7"/></svg>',
+    trophy:'<svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M8 21h8M12 17v4M7 4h10v5a5 5 0 0 1-10 0V4z"/><path d="M17 5h3v2a3 3 0 0 1-3 3M7 5H4v2a3 3 0 0 0 3 3"/></svg>',
+    list:'<svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" aria-hidden="true"><path d="M9 6h11M9 12h11M9 18h11M4 6h.01M4 12h.01M4 18h.01"/></svg>',
+    user:'<svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" aria-hidden="true"><circle cx="12" cy="8" r="4"/><path d="M4 21a8 8 0 0 1 16 0"/></svg>'
+  };
+  function top(title, opts){
+    opts = opts || {};
+    return '<header class="top'+(opts.light?' light':'')+'">' +
+      (opts.noBack ? '' : '<button class="iconbtn" data-a="back" aria-label="뒤로">'+I.back+'</button>') +
+      '<h1>'+title+'</h1>' + (opts.right ? '<span class="right">'+opts.right+'</span>' : '') + '</header>';
+  }
+  function tabs(cur){
+    function b(k,label,icon){ return '<button data-a="tab" data-v="'+k+'"'+(cur===k?' aria-current="page"':'')+'>'+icon+label+'</button>'; }
+    return '<nav class="tabs" aria-label="메뉴">'+b('list','대회',I.trophy)+b('mine','내 신청',I.list)+b('profile','프로필',I.user)+'</nav>';
+  }
+
+  var V = {};
+  V.start = function(){
+    return '<main class="body" style="justify-content:space-between;min-height:100vh;padding:0">' +
+      '<div class="poster" style="flex:1;min-height:420px;padding:28px 24px;gap:14px"><span class="brand display" style="font-size:44px;position:relative">SJ 대회</span><div style="position:relative;font-size:17px;color:var(--stage-muted);line-height:1.6">대회 신청부터 결제, 내 기록까지<br>한 곳에서</div></div>' +
+      '<div style="display:flex;flex-direction:column;gap:10px;padding:24px 20px calc(24px + env(safe-area-inset-bottom,0px))">' +
+        '<button data-a="kakao" style="min-height:54px;border:0;border-radius:12px;background:#FEE500;color:rgba(0,0,0,.85);font-size:17px;font-weight:700">카카오로 시작하기</button>' +
+        '<button class="btn ghost" data-a="go" data-v="login">휴대폰 번호로 로그인</button>' +
+        '<div class="note" style="text-align:center">시작하면 이용약관과 개인정보 처리방침에 동의하게 돼요</div>' +
+      '</div></main>';
+  };
+  V.list = function(){
+    return '<header class="top"><span class="brand display">SJ 대회</span><span class="right"><span class="sample">시안 · 샘플</span></span></header>' +
+    '<main class="body"><h2 style="font-size:22px">신청 가능한 대회</h2>' +
+    '<button data-a="go" data-v="detail" style="border:1px solid var(--line);border-radius:16px;overflow:hidden;background:var(--surface);padding:0;text-align:left;display:flex;flex-direction:column">' +
+      '<div class="poster" style="height:190px"><span class="pill live" style="align-self:flex-start;position:relative">신청중</span><div class="title display">[대회명]<br>보디빌딩 챔피언십</div></div>' +
+      '<div style="padding:16px;display:flex;flex-direction:column;gap:6px"><div class="muted" style="font-size:14px">[대회 날짜] / [장소]</div><div class="muted" style="font-size:14px">신청 기간 [시작일] ~ [마감일]</div>' +
+      '<div class="row" style="margin-top:6px"><span class="muted" style="font-size:13px">주최 [대회장명]</span><b style="font-size:14px">자세히 보기</b></div></div></button>' +
+    '<div class="card"><div class="row"><b class="muted">[다른 대회명]</b><span class="pill off">오픈 예정</span></div><div class="note">대회가 여러 개 올라와도 이 목록에 함께 보여요</div></div>' +
+    '<button class="linkish" data-a="go" data-v="admin">대회장 관리 화면 보기</button>' +
+    '</main>' + tabs('list');
+  };
+  V.detail = function(){
+    var rows = DIV.map(function(d){ var off=d.left<=0; return '<div><div style="display:flex;flex-direction:column;gap:2px"><b style="font-size:15px;'+(off?'color:var(--off)':'')+'">'+d.name+'</b><span class="muted" style="font-size:13px">'+(off?'정원 마감':'남은 자리 '+d.left+'명')+'</span></div><b style="'+(off?'color:var(--off)':'')+'">'+won(d.fee)+'</b></div>'; }).join('');
+    return top('대회 상세') +
+    '<div class="poster" style="height:200px"><span class="muted" style="font-size:12px;color:var(--stage-muted);position:relative">[대회 포스터 이미지]</span><div class="title display" style="font-size:32px">[대회명]<br>보디빌딩 챔피언십</div></div>' +
+    '<main class="body">' +
+      '<div class="card" style="font-size:14px;gap:10px">' +
+        '<div style="display:flex;gap:12px"><span class="muted" style="width:64px">일시</span>[대회 날짜·시간]</div>' +
+        '<div style="display:flex;gap:12px"><span class="muted" style="width:64px">장소</span>[장소]</div>' +
+        '<div style="display:flex;gap:12px"><span class="muted" style="width:64px">신청 기간</span>[시작일] ~ [마감일]</div>' +
+        '<div style="display:flex;gap:12px"><span class="muted" style="width:64px">주최</span>[대회장명], [문의 연락처]</div></div>' +
+      '<div class="row"><h2>종목과 참가비</h2><span class="muted" style="font-size:12px">금액·정원은 샘플</span></div><div class="list">'+rows+'</div>' +
+      '<h2>대회 요강</h2><div class="card note">[계측 일정, 규정, 준비물 등 대회장이 입력]</div>' +
+      '<h2>환불 규정</h2><div class="card note">[환불 규정 대회장이 입력]</div>' +
+    '</main><div class="foot"><button class="btn" data-a="apply">신청하기</button></div>';
+  };
+  V.login = function(){
+    return top('로그인', {light:true}) +
+    '<main class="body" style="gap:26px;padding-top:28px">' +
+      '<div style="display:flex;flex-direction:column;gap:8px"><h2 style="font-size:26px;line-height:1.3">휴대폰 번호로<br>시작할게요</h2><div class="muted">비밀번호 없이 문자 인증번호로 로그인해요</div></div>' +
+      '<div class="field"><label for="ph">휴대폰 번호</label><div style="display:flex;gap:8px"><input id="ph" type="tel" inputmode="tel" value="010-1234-5678" style="flex:1;min-width:0"><button data-a="send" style="height:50px;padding:0 16px;border:0;border-radius:12px;background:var(--btn);color:var(--btn-fg);font-weight:600">'+(S.sent?'다시 받기':'인증번호 받기')+'</button></div></div>' +
+      (S.sent ? '<div class="field"><label for="cd">인증번호 6자리</label><input id="cd" type="text" inputmode="numeric" value="482915" style="letter-spacing:6px;font-size:20px;border:2px solid var(--sel)"><span class="note">2:58 안에 입력해 주세요. 시안이라 아무 숫자나 괜찮아요</span></div>' : '') +
+      '<div class="note">카카오를 쓰지 않는 분을 위한 로그인이에요. 처음이면 이름을 입력하고 약관에 동의해요.</div>' +
+    '</main><div class="foot"><button class="btn" data-a="login"'+(S.sent?'':' disabled')+'>'+(S.sent?'인증하고 계속하기':'인증번호를 먼저 받아주세요')+'</button></div>';
+  };
+  V.apply = function(){
+    var s = sel();
+    var items = DIV.map(function(d,i){
+      var off = d.left<=0, on = !off && !!S.picked[i];
+      return '<button class="choice" data-a="pick" data-v="'+i+'" aria-pressed="'+on+'"'+(off?' disabled':'')+'><span class="box">'+(on?I.check:'')+'</span><span class="t"><span class="n">'+d.name+'</span><span class="s">'+(off?'정원 마감':'남은 자리 '+d.left+'명')+'</span></span><span class="p">'+won(d.fee)+'</span></button>';
+    }).join('');
+    return top('신청서 작성', {light:true, right:'1 / 2'}) +
+    '<main class="body">' +
+      '<div class="row"><h2>출전 종목</h2><span class="muted" style="font-size:13px">여러 개 선택 가능</span></div>' +
+      '<div style="display:flex;flex-direction:column;gap:10px">'+items+'</div>' +
+      '<h2 style="margin-top:6px">참가자 정보</h2><div class="note" style="margin-top:-10px">아래 항목은 대회장이 대회마다 정해요</div>' +
+      '<div class="field"><label for="nm">이름</label><input id="nm" value="김선수"></div>' +
+      '<div class="field"><label for="gy">소속 체육관</label><input id="gy" placeholder="예: OO 휘트니스"></div>' +
+      '<div class="grid2"><div class="field"><label for="ht">키 (cm)</label><input id="ht" inputmode="decimal" placeholder="175"></div><div class="field"><label for="wt">체중 (kg)</label><input id="wt" inputmode="decimal" placeholder="68.5"></div></div>' +
+    '</main><div class="foot"><div class="row"><span class="muted" style="font-size:14px">'+(s.count?s.count+'개 종목 선택':'선택한 종목 없음')+'</span><b style="font-size:22px">'+won(s.total)+'</b></div>' +
+    '<button class="btn" data-a="go" data-v="confirm"'+(s.count?'':' disabled')+'>'+(s.count?'다음':'종목을 선택해 주세요')+'</button></div>';
+  };
+  V.confirm = function(){
+    var s = sel();
+    var lines = DIV.map(function(d,i){ return (S.picked[i]&&d.left>0) ? '<div class="row" style="font-size:15px"><span>'+d.name+'</span><b>'+won(d.fee)+'</b></div>' : ''; }).join('');
+    var all = AGREE.every(function(_,i){ return S.agree[i]; });
+    var ag = AGREE.map(function(t,i){ var on=!!S.agree[i]; return '<button class="choice" data-a="agree" data-v="'+i+'" aria-pressed="'+on+'" style="min-height:52px;border-width:1px"><span class="box round">'+(on?I.check:'')+'</span><span class="t"><span style="font-size:14px">'+t+'</span></span></button>'; }).join('');
+    return top('신청 확인', {light:true, right:'2 / 2'}) +
+    '<main class="body">' +
+      '<div class="card" style="gap:12px"><span class="muted" style="font-size:13px">[대회명] 보디빌딩 챔피언십, 주최 [대회장명]</span>'+lines+'<div style="height:1px;background:var(--line)"></div><div class="row"><b>결제 금액</b><b style="font-size:24px">'+won(s.total)+'</b></div></div>' +
+      '<div class="card" style="font-size:14px;gap:4px"><div style="display:flex;gap:12px"><span class="muted" style="width:56px">이름</span>김선수</div><div style="display:flex;gap:12px"><span class="muted" style="width:56px">연락처</span>010-1234-5678</div><div style="display:flex;gap:12px"><span class="muted" style="width:56px">소속</span>[소속 체육관]</div></div>' +
+      '<h2 style="font-size:16px">동의가 필요해요</h2><div style="display:flex;flex-direction:column;gap:8px;margin-top:-6px">'+ag+'</div>' +
+      '<div class="note">결제 화면으로 넘어가면 30분 동안 자리를 잡아둬요. 그 안에 결제하지 않으면 신청이 자동으로 취소돼요.</div>' +
+    '</main><div class="foot"><button class="btn" data-a="go" data-v="pay"'+(all?'':' disabled')+'>'+(all?won(s.total)+' 결제하기':'필수 항목에 모두 동의해 주세요')+'</button></div>';
+  };
+  V.pay = function(){
+    var s = sel();
+    var ms = [['신용·체크카드','모든 카드사'],['간편결제','카카오페이, 네이버페이, 토스페이']].map(function(m,i){ var on=S.method===i; return '<button class="choice" data-a="method" data-v="'+i+'" aria-pressed="'+on+'"><span class="box round">'+(on?I.check:'')+'</span><span class="t"><span class="n">'+m[0]+'</span><span class="s">'+m[1]+'</span></span></button>'; }).join('');
+    return '<header class="top light"><span class="brand display" style="font-size:21px">SJ 대회</span><span class="muted" style="font-size:14px">온라인 결제</span><button class="iconbtn" data-a="payclose" aria-label="결제 닫기" style="margin-left:auto">'+I.close+'</button></header>' +
+    '<main class="body" style="background:var(--surface)">' +
+      '<div style="display:flex;flex-direction:column;gap:6px"><span class="muted" style="font-size:14px">[대회명] 참가비, '+s.count+'개 종목</span><b style="font-size:34px">'+won(s.total)+'</b><span style="font-size:13px;color:var(--wait-fg);background:var(--wait-bg);align-self:flex-start;padding:3px 8px;border-radius:6px">남은 시간 29:41</span></div>' +
+      '<h2 style="font-size:16px">결제 수단</h2><div style="display:flex;flex-direction:column;gap:10px;margin-top:-6px">'+ms+'</div>' +
+      '<div class="note" style="background:var(--soft);border-radius:12px;padding:12px 14px">시안이라 실제로 결제되지 않아요. 결제하기를 누르면 결과 화면으로 넘어가요.</div>' +
+    '</main><div class="foot"><button class="btn" data-a="dopay">'+won(s.total)+' 결제하기</button><div class="muted" style="font-size:11px;text-align:center">판매 스타조이컴퍼니, 결제대행 토스페이먼츠</div></div>';
+  };
+  V.result = function(){
+    var s = sel();
+    if(!S.done){
+      return '<main class="body" style="align-items:center;justify-content:center;gap:20px;min-height:80vh"><div class="spin" role="status" aria-label="확인 중"></div><h2 style="font-size:20px">결제를 확인하고 있어요</h2><div class="note" style="text-align:center">화면을 닫아도 결제 결과는 그대로 반영돼요</div></main>';
+    }
+    return '<main class="body" style="padding-top:64px;gap:24px">' +
+      '<div style="display:flex;flex-direction:column;align-items:center;gap:14px"><div style="width:72px;height:72px;border-radius:999px;background:var(--ok);color:#fff;display:flex;align-items:center;justify-content:center"><svg width="36" height="36" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12l5 5L19 7"/></svg></div><h2 style="font-size:26px">신청이 완료됐어요</h2><span class="muted" style="font-size:14px">결제 완료 문자도 보내드렸어요</span></div>' +
+      '<div class="card" style="gap:10px;font-size:15px"><div class="row"><span class="muted">신청번호</span><b>SJ26-0147</b></div><div class="row"><span class="muted">대회</span><span>[대회명]</span></div><div class="row"><span class="muted">종목</span><span style="text-align:right">'+esc(s.names.join(', '))+'</span></div><div class="row"><span class="muted">결제 금액</span><b>'+won(s.total)+'</b></div></div>' +
+    '</main><div class="foot"><button class="btn" data-a="tab" data-v="mine">내 신청 내역 보기</button><button class="btn ghost" data-a="tab" data-v="list">대회 목록으로</button></div>';
+  };
+  V.mine = function(){
+    var s = sel();
+    var first = S.paid ?
+      '<div class="card" style="gap:10px"><div class="row"><span class="pill ok">결제 완료</span><span class="muted" style="font-size:13px">SJ26-0147</span></div><b style="font-size:17px">[대회명] 보디빌딩 챔피언십</b><span class="muted" style="font-size:14px">[대회 날짜] / [장소]</span><div class="row" style="font-size:14px;padding-top:8px;border-top:1px solid var(--line)"><span>'+esc(s.names.join(', '))+'</span><b>'+won(s.total)+'</b></div></div>' :
+      '<div class="card" style="border:2px solid var(--sel);gap:10px"><div class="row"><span class="pill wait">결제 대기</span><span style="font-size:13px;font-weight:600;color:var(--wait-fg)">24분 남음</span></div><b style="font-size:17px">[대회명] 보디빌딩 챔피언십</b><div class="row" style="font-size:14px"><span>'+esc(s.names.join(', ')||'종목 미선택')+'</span><b>'+won(s.total)+'</b></div><button class="btn small" data-a="go" data-v="pay">결제 이어하기</button></div>';
+    return '<header class="top"><span class="brand display" style="font-size:20px">내 신청 내역</span></header>' +
+    '<main class="body">'+first+
+      '<div class="card" style="background:var(--soft);border-color:transparent"><div><span class="pill off">기간 만료</span></div><span class="muted" style="font-size:15px;font-weight:600">[이전 대회명]: 결제하지 않아 자동 취소</span></div>' +
+    '</main>' + tabs('mine');
+  };
+  V.profile = function(){
+    return '<header class="top" style="flex-direction:column;align-items:stretch;gap:16px;padding:22px 20px 20px">' +
+      '<div style="display:flex;align-items:center;gap:14px"><div class="display" style="width:64px;height:64px;border-radius:999px;background:var(--gold);color:#131A2A;display:flex;align-items:center;justify-content:center;font-size:28px">김</div><div style="display:flex;flex-direction:column;gap:3px"><b style="font-size:22px">김선수</b><span style="font-size:14px;color:var(--stage-muted)">[소속 체육관]</span></div></div>' +
+      '<div class="stats"><div><small>참가</small><b>3회</b></div><div><small>입상</small><b>2회</b></div><div><small>최고 성적</small><b>2위</b></div></div></header>' +
+    '<main class="body">' +
+      '<button class="choice" data-a="pub" aria-pressed="false" style="border-width:1px;justify-content:space-between"><span class="t"><span class="n">프로필 공개</span><span class="s">'+(S.pub?'누구나 내 기록을 볼 수 있어요':'지금은 나만 볼 수 있어요')+'</span></span><span class="switch'+(S.pub?' on':'')+'" aria-hidden="true"><span></span></span></button>' +
+      '<h2>입상 기록</h2>' +
+      '<div class="card" style="margin-top:-8px"><div class="row"><span class="rank gold">2위</span><span class="pill ok">공식 기록</span></div><b style="font-size:15px">[대회명] 보디빌딩 챔피언십</b><span class="muted" style="font-size:13px">보디빌딩 -70kg, 대회 주최측이 입력</span></div>' +
+      '<div class="card"><div class="row"><span class="rank">3위</span><span class="pill wait">본인 입력, 확인 중</span></div><b style="font-size:15px">[외부 대회명]</b><span class="muted" style="font-size:13px">클래식 피지크, 상장 사진 확인 대기</span></div>' +
+      '<button class="btn ghost" data-a="form" style="border:1px dashed var(--muted);border-radius:12px">'+(S.form?'입력 닫기':'다른 대회 기록 추가')+'</button>' +
+      (S.form ? '<div class="card" style="gap:12px"><div class="field"><label for="en">대회명</label><input id="en" placeholder="예: OO배 보디빌딩 대회"></div><div class="grid2"><div class="field"><label for="ec">종목</label><input id="ec" placeholder="피지크"></div><div class="field"><label for="er">순위</label><input id="er" placeholder="1위"></div></div><button class="btn small ghost" style="border:1px solid var(--line)">상장 사진 올리기</button><span class="note">운영자가 사진을 확인하면 "확인됨"으로 바뀌어요</span></div>' : '') +
+      '<h2>참가 이력</h2><div class="note" style="margin-top:-12px">이 앱으로 신청한 대회는 자동으로 쌓여요</div>' +
+      '<div class="list"><div><span>[대회명] 보디빌딩 챔피언십</span><span class="muted">2개 종목</span></div><div><span>[이전 대회명]</span><span class="muted">1개 종목</span></div></div>' +
+    '</main>' + tabs('profile');
+  };
+  V.admin = function(){
+    var f = S.filter;
+    var paidN = ROWS.filter(function(r){return r[5]==='paid';}).length, pendN = ROWS.length - paidN;
+    var chips = [['all','전체 '+ROWS.length],['paid','결제 완료 '+paidN],['pending','결제 대기 '+pendN]].map(function(c){ return '<button class="chip" data-a="filter" data-v="'+c[0]+'" aria-pressed="'+(f===c[0])+'">'+c[1]+'</button>'; }).join('');
+    var body = ROWS.filter(function(r){ return f==='all'||r[5]===f; }).map(function(r){ return '<tr><td><b>'+r[0]+'</b></td><td>'+r[1]+'</td><td class="muted">'+r[2]+'</td><td>'+r[3]+'</td><td><b>'+won(r[4])+'</b></td><td><span class="pill '+(r[5]==='paid'?'ok':'wait')+'">'+(r[5]==='paid'?'결제 완료':'결제 대기')+'</span></td><td class="muted">'+r[6]+'</td></tr>'; }).join('');
+    var sum = [['보디빌딩 -70kg',34,50],['보디빌딩 -80kg',27,35],['보디빌딩 +80kg',15,30],['클래식 피지크',25,30],['피지크',42,45],['비키니',40,40]].map(function(x){ return '<div class="card" style="gap:2px;padding:14px"><span class="muted" style="font-size:13px">'+x[0]+'</span><b style="font-size:22px">'+x[1]+'명</b><span class="muted" style="font-size:12px">정원 '+x[2]+'명'+(x[1]>=x[2]?', 마감':'')+'</span></div>'; }).join('');
+    return top('대회장 관리', {right:'[대회장명] 님'}) +
+    '<main class="body">' +
+      '<div style="display:flex;flex-direction:column;gap:4px"><span class="muted" style="font-size:13px">신청 기간 [시작일] ~ [마감일], 샘플 데이터</span><h2 style="font-size:24px">[대회명] 보디빌딩 챔피언십</h2></div>' +
+      '<div class="chips"><button class="btn small" data-a="excel" style="width:auto;padding:0 18px">엑셀 다운로드</button><button class="btn small" disabled style="width:auto;padding:0 18px">대회 결과 입력 (대회 후 열림)</button></div>' +
+      '<div class="sumgrid">'+sum+'</div>' +
+      '<div class="chips">'+chips+'</div>' +
+      '<div class="field"><label for="q">이름 또는 전화번호로 찾기</label><input id="q" placeholder="예: 김선수"></div>' +
+      '<div class="scroll"><table><thead><tr><th>신청번호</th><th>이름</th><th>연락처</th><th>종목</th><th>금액</th><th>상태</th><th>신청 일시</th></tr></thead><tbody>'+body+'</tbody></table></div>' +
+    '</main>';
+  };
+
+  function render(){
+    app.className = S.screen==='admin' ? 'wide' : '';
+    app.innerHTML = V[S.screen]() + (S.toast ? '<div class="toast" role="status">'+S.toast+'</div>' : '');
+  }
+  function go(scr){ S.hist.push(S.screen); S.screen = scr; if(scr==='result'){ startResult(); } render(); window.scrollTo(0,0); }
+  function tab(scr){ S.hist = []; S.screen = scr; render(); window.scrollTo(0,0); }
+  function startResult(){ S.done=false; clearTimeout(timer); timer=setTimeout(function(){ S.done=true; S.paid=true; if(S.screen==='result') render(); }, 1500); }
+  function toast(msg){ S.toast=msg; render(); clearTimeout(toastTimer); toastTimer=setTimeout(function(){ S.toast=''; render(); }, 2600); }
+
+  app.addEventListener('click', function(e){
+    var el = e.target.closest('[data-a]'); if(!el || el.disabled) return;
+    var a = el.getAttribute('data-a'), v = el.getAttribute('data-v');
+    if(a==='back'){ S.screen = S.hist.pop() || 'list'; render(); window.scrollTo(0,0); }
+    else if(a==='go'){ go(v); }
+    else if(a==='tab'){ tab(v); }
+    else if(a==='apply'){ go(S.loggedIn ? 'apply' : 'login'); }
+    else if(a==='kakao'){ S.loggedIn = true; toast('시안: 실제로는 카카오 동의 화면을 거쳐 돌아와요'); tab('list'); }
+    else if(a==='send'){ S.sent = true; render(); }
+    else if(a==='login'){ S.loggedIn = true; tab('list'); }
+    else if(a==='pick'){ S.picked[v] = !S.picked[v]; render(); }
+    else if(a==='agree'){ S.agree[v] = !S.agree[v]; render(); }
+    else if(a==='method'){ S.method = +v; render(); }
+    else if(a==='dopay'){ go('result'); }
+    else if(a==='payclose'){ tab('mine'); }
+    else if(a==='pub'){ S.pub = !S.pub; render(); }
+    else if(a==='form'){ S.form = !S.form; render(); }
+    else if(a==='filter'){ S.filter = v; render(); }
+    else if(a==='excel'){ toast('시안이라 파일은 안 받아져요. 실제로는 명단 엑셀이 내려받아져요'); }
+  });
+  render();
+})();
+</script>
+</body>
+</html>
