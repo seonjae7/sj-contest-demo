@@ -4,7 +4,7 @@
 <meta charset="utf-8">
 <meta name="robots" content="noindex">
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
-<title>SJ 대회 · 앱 시안</title>
+<title>IFBB PRO 대회 · 앱 시안</title>
 <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Black+Han+Sans&family=IBM+Plex+Sans+KR:wght@400;500;600;700&display=swap">
 <style>
 :root{
@@ -166,7 +166,7 @@ td{padding:11px 14px;border-top:1px solid var(--line);white-space:nowrap}
   var V = {};
   V.start = function(){
     return '<main class="body" style="justify-content:space-between;min-height:100vh;padding:0">' +
-      '<div class="poster" style="flex:1;min-height:420px;padding:28px 24px;gap:14px"><span class="brand display" style="font-size:44px;position:relative">SJ 대회</span><div style="position:relative;font-size:17px;color:var(--stage-muted);line-height:1.6">대회 신청부터 결제, 내 기록까지<br>한 곳에서</div></div>' +
+      '<div class="poster" style="flex:1;min-height:420px;padding:28px 24px;gap:14px"><div style="position:relative;width:96px;height:96px"><img src="logo.png" alt="IFBB PRO 로고" style="width:96px;height:96px;object-fit:contain;display:block" onerror="this.style.display=\'none\';this.nextElementSibling.style.display=\'flex\'"><div style="display:none;width:96px;height:96px;border:2px dashed var(--stage-muted);border-radius:16px;align-items:center;justify-content:center;text-align:center;font-size:12px;line-height:1.4;color:var(--stage-muted)">[단체<br>공식 로고]</div></div><span class="brand display" style="font-size:44px;position:relative;padding-left:0">IFBB PRO</span><div style="position:relative;font-size:17px;color:var(--stage-muted);line-height:1.6">IFBB PRO 대회 신청부터 결제,<br>내 선수 기록까지</div></div>' +
       '<div style="display:flex;flex-direction:column;gap:10px;padding:24px 20px calc(24px + env(safe-area-inset-bottom,0px))">' +
         '<button data-a="kakao" style="min-height:54px;border:0;border-radius:12px;background:#FEE500;color:rgba(0,0,0,.85);font-size:17px;font-weight:700">카카오로 시작하기</button>' +
         '<button class="btn ghost" data-a="go" data-v="login">휴대폰 번호로 로그인</button>' +
@@ -174,13 +174,13 @@ td{padding:11px 14px;border-top:1px solid var(--line);white-space:nowrap}
       '</div></main>';
   };
   V.list = function(){
-    return '<header class="top"><span class="brand display">SJ 대회</span><span class="right"><span class="sample">시안 · 샘플</span></span></header>' +
+    return '<header class="top"><img src="logo.png" alt="" style="height:30px;width:auto;margin-left:12px;display:block" onerror="this.remove()"><span class="brand display">IFBB PRO</span><span class="right"><span class="sample">시안 · 샘플</span></span></header>' +
     '<main class="body"><h2 style="font-size:22px">신청 가능한 대회</h2>' +
     '<button data-a="go" data-v="detail" style="border:1px solid var(--line);border-radius:16px;overflow:hidden;background:var(--surface);padding:0;text-align:left;display:flex;flex-direction:column">' +
       '<div class="poster" style="height:190px"><span class="pill live" style="align-self:flex-start;position:relative">신청중</span><div class="title display">[대회명]<br>보디빌딩 챔피언십</div></div>' +
       '<div style="padding:16px;display:flex;flex-direction:column;gap:6px"><div class="muted" style="font-size:14px">[대회 날짜] / [장소]</div><div class="muted" style="font-size:14px">신청 기간 [시작일] ~ [마감일]</div>' +
       '<div class="row" style="margin-top:6px"><span class="muted" style="font-size:13px">주최 [대회장명]</span><b style="font-size:14px">자세히 보기</b></div></div></button>' +
-    '<div class="card"><div class="row"><b class="muted">[다른 대회명]</b><span class="pill off">오픈 예정</span></div><div class="note">대회가 여러 개 올라와도 이 목록에 함께 보여요</div></div>' +
+    '<div class="card"><div class="row"><b class="muted">[다음 대회명]</b><span class="pill off">오픈 예정</span></div><div class="note">IFBB PRO의 다음 대회도 여기에 올라와요</div></div>' +
     '<button class="linkish" data-a="go" data-v="admin">대회장 관리 화면 보기</button>' +
     '</main>' + tabs('list');
   };
@@ -241,7 +241,7 @@ td{padding:11px 14px;border-top:1px solid var(--line);white-space:nowrap}
   V.pay = function(){
     var s = sel();
     var ms = [['신용·체크카드','모든 카드사'],['간편결제','카카오페이, 네이버페이, 토스페이']].map(function(m,i){ var on=S.method===i; return '<button class="choice" data-a="method" data-v="'+i+'" aria-pressed="'+on+'"><span class="box round">'+(on?I.check:'')+'</span><span class="t"><span class="n">'+m[0]+'</span><span class="s">'+m[1]+'</span></span></button>'; }).join('');
-    return '<header class="top light"><span class="brand display" style="font-size:21px">SJ 대회</span><span class="muted" style="font-size:14px">온라인 결제</span><button class="iconbtn" data-a="payclose" aria-label="결제 닫기" style="margin-left:auto">'+I.close+'</button></header>' +
+    return '<header class="top light"><span class="brand display" style="font-size:21px">IFBB PRO</span><span class="muted" style="font-size:14px">온라인 결제</span><button class="iconbtn" data-a="payclose" aria-label="결제 닫기" style="margin-left:auto">'+I.close+'</button></header>' +
     '<main class="body" style="background:var(--surface)">' +
       '<div style="display:flex;flex-direction:column;gap:6px"><span class="muted" style="font-size:14px">[대회명] 참가비, '+s.count+'개 종목</span><b style="font-size:34px">'+won(s.total)+'</b><span style="font-size:13px;color:var(--wait-fg);background:var(--wait-bg);align-self:flex-start;padding:3px 8px;border-radius:6px">남은 시간 29:41</span></div>' +
       '<h2 style="font-size:16px">결제 수단</h2><div style="display:flex;flex-direction:column;gap:10px;margin-top:-6px">'+ms+'</div>' +
